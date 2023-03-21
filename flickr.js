@@ -71,20 +71,31 @@ function imgUrl(img, size) {
     return url;
 }
 
-window.onscroll = function() {
-    const doc = document.documentElement;
+// window.onscroll = function() {
+//     const doc = document.documentElement;
 
-    const offset = doc.scrollTop + window.outerHeight;
-    const height = doc.offsetHeight;
+//     const offset = doc.scrollTop + window.outerHeight;
+//     const height = doc.offsetHeight;
 
-    if(offset >= height) {
-        //console.log("at bottom");
+//     if(offset >= height) {
+//         //console.log("at bottom");
 
-        if(!loadingImages) {
-            nextPage();
-        }
+//         if(!loadingImages) {
+//             nextPage();
+//         }
+//     }
+// }
+
+window.addEventListener("scroll", function() {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    const offset = scrollTop + clientHeight;
+  
+    if (offset >= scrollHeight) {
+      if (!loadingImages) {
+        nextPage();
+      }
     }
-}
+  });
 
 async function nextPage() {
     loadingImages = true;
